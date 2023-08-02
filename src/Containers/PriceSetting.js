@@ -1,4 +1,4 @@
-import { AgeInput, PriceInput } from "../Components";
+import { AgeInput, PriceInput } from "../components";
 import { Divider, Typography, Button } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 function PriceSetting({
