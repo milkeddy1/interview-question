@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { PriceSetting } from "./containers";
+import { PriceSetting } from "./container";
 import { Button } from "antd";
 import {
   FindNotIncludedRange,
