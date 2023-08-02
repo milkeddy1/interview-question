@@ -10,8 +10,7 @@ const options = Array.from(Array(MAX_AGE + 1)).map((_, idx) => {
   };
 });
 
-function AgeInput({ rangeIsOverLapped }) {
-  const [selectedRange, setSelectedRange] = useState([0, 0]);
+function AgeInput({ isRangeOverlapped, ageValue, selectAgeRange, id }) {
   const [secondOptions, seSecondOptions] = useState(
     Array.from(Array(MAX_AGE + 1)).map((_, idx) => {
       return {
@@ -33,16 +32,20 @@ function AgeInput({ rangeIsOverLapped }) {
             width: 120,
             borderRadius: 0,
           }}
-          value={selectedRange[0]}
+          value={ageValue[0]}
           size="large"
           onChange={(e) => {
-            setSelectedRange((prev) => {
-              if (e > prev[1]) {
-                return [e, e];
-              }
-              return [e, prev[1]];
+            selectAgeRange(id, e, "first");
+            seSecondOptions((prev) => {
+              return prev.map((item, idx) => {
+                if (idx < e)
+                  return {
+                    ...item,
+                    disabled: true,
+                  };
+                return item;
+              });
             });
-            seSecondOptions(options.slice(e));
           }}
           options={options}
         />
@@ -77,14 +80,14 @@ function AgeInput({ rangeIsOverLapped }) {
             borderRadius: 0,
           }}
           size="large"
-          value={selectedRange[1]}
+          value={ageValue[1]}
           onChange={(e) => {
-            setSelectedRange((prev) => [prev[0], e]);
+            selectAgeRange(id, e, "second");
           }}
           options={secondOptions}
         />
       </div>
-      {rangeIsOverLapped && (
+      {isRangeOverlapped && (
         <div
           style={{ background: "#F8EAE8", borderRadius: "5px", width: "100%" }}
         >

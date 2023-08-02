@@ -1,8 +1,5 @@
-import { useState } from "react";
 import { Input } from "antd";
-import { ThousandthsFormatter } from "../utils";
-function PriceInput() {
-  const [inputPrice, setInputPrice] = useState("");
+function PriceInput({ priceHandle, id, priceValue }) {
   return (
     <div style={{ width: "290px" }}>
       <p style={{ color: "#8E8E8E", fontSize: "12px", margin: ".2rem" }}>
@@ -27,17 +24,9 @@ function PriceInput() {
         </div>
         <Input
           placeholder="請輸入費用"
-          value={inputPrice}
+          value={priceValue}
           onChange={(e) => {
-            if (e.target.value === "") setInputPrice("");
-            const removeComma = e.target.value.replace(/,/g, "");
-            console.log(removeComma, "removeComma");
-            if (Number(removeComma) || removeComma === "0") {
-              console.log(e.target.value, "");
-              const removeComma = e.target.value.replace(/,/g, "");
-              const formattedPrice = ThousandthsFormatter(removeComma);
-              setInputPrice(formattedPrice);
-            }
+            priceHandle(e.target.value, id);
           }}
           style={{
             width: "250px",
@@ -48,7 +37,7 @@ function PriceInput() {
           }}
         />
       </div>
-      {inputPrice === "" && (
+      {priceValue === "" && (
         <div
           style={{ background: "#F8EAE8", borderRadius: "5px", width: "290px" }}
         >
