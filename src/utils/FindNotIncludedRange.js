@@ -5,7 +5,7 @@ function findRangeNumbers(arrayOfTwoNumbers) {
   const firstNum = arrayOfTwoNumbers[0];
   const secondNum = arrayOfTwoNumbers[1];
   const amountsOfAllNumbers = Math.abs(firstNum - secondNum) + 1;
-  if (firstNum === secondNum) return firstNum;
+  if (firstNum === secondNum) return [firstNum];
 
   for (let i = 0; i < amountsOfAllNumbers; i++) {
     range.push(firstNum + i);
